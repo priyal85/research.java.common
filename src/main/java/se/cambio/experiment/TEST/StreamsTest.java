@@ -1,5 +1,6 @@
 package se.cambio.experiment.TEST;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -32,6 +33,10 @@ public class StreamsTest
     {
       System.out.println(entry.getKey()+" : " +entry.getValue());
     }
+    
+    String[] s= {"xYz","123","Abc"};
+   // Arrays.stream(identifiers).filter(identifier -> identifier.type == type).sorted(comparator).map(identifier -> identifier.identifier).collect(Collectors.toList());
+    
   }
 
 }

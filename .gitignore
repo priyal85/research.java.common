@@ -4,3 +4,4 @@ target
 .project
 output
 /bin/
+test-output/

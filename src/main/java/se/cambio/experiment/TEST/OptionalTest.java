@@ -13,6 +13,7 @@ public class OptionalTest
   {
     fromNullableId(null).ifPresent(System.out::println);
     System.out.println(fromNullableId(new Id("10")).get());
+    Object object = Optional.empty().get();
   }
 
   private static <I> Optional<I> fromNullableId(Id<I> id)

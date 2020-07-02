@@ -5,7 +5,7 @@ public class ThreadTest2
 
   public static void main(String[] args)
   {
-    ValReader reader = new ValReader();
+    ValReader2 reader = new ValReader2();
 
     Thread t1 = new Thread(reader::printVals, "T1");
     Thread t2 = new Thread(reader::printVals, "T2");

@@ -2,6 +2,7 @@ package com.test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -16,6 +17,7 @@ public class TestMain
 
   public static void main(String[] args)
   {
+    System.out.println(getXpathForHistoryItemList(1));
     Logger logger = LoggerFactory.getLogger(TestMain.class);
     logger.info("Hello {}", "Nimal");
     logger.info("Hello {} %s {}", "Nimal");
@@ -59,6 +61,24 @@ public class TestMain
     }
   }
    
+  }
+  
+
+  private static String getXpathForHistoryItemList(int index) {
+    return String.format("//ul[@class='app-history-item-list']/li[%d]",index);
+  }
+  
+  public void printAreas(Collection<Shape> shapes) {
+    for (Shape shape : shapes)
+    {
+      System.out.println("Area is :" +shape.area());
+      
+    }
+  }
+  
+  
+  interface Shape{
+     double area();
   }
   
   enum TEst{

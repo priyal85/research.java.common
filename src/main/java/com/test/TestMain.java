@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,17 @@ public class TestMain
     Logger logger = LoggerFactory.getLogger(TestMain.class);
     logger.info("Hello {}", "Nimal");
     logger.info("Hello {} %s {}", "Nimal");
+    
+    Set<String> l1 = new HashSet<>();
+    l1.add(new String("abc"));
+    l1.add(new String("cde"));
+    l1.add(new String("efg"));
+    Set<String> l2 = new HashSet<>();
+    l2.add(new String("abc"));
+    l2.add(new String("cde"));
+    l2.add(new String("efg"));
+    
+    System.out.println("Two sets are equal :" +l1.equals(l2));
    Locale lc = Locale.getDefault();
    System.out.println(lc.getLanguage());
    TEst.A.valP.getDeclaringClass();

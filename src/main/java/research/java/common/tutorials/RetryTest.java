@@ -21,19 +21,26 @@ public class RetryTest
     retryTemplate.setRetryPolicy(retryPolicy);
     retryTemplate.setThrowLastExceptionOnExhausted(true);
     long startTime = System.currentTimeMillis();
-    retryTemplate.execute(context -> {
-      
-      System.out.println("Attempt "+ (count+1) + " at "+ (System.currentTimeMillis()- startTime));
-      
-      if (count==10)
-      {
-        System.out.println("Task completed at "+ (System.currentTimeMillis() - startTime));
-      } else {
-        count++;
-        throw new IllegalStateException("Task is not ready");
-      }
-      return true;
-    });
+    try
+    {
+      retryTemplate.execute(context -> {
+        
+        System.out.println("Attempt "+ (count+1) + " at "+ (System.currentTimeMillis()- startTime));
+        
+        if (count==10)
+        {
+          System.out.println("Task completed at "+ (System.currentTimeMillis() - startTime));
+        } else {
+          count++;
+          throw new IllegalStateException("Task is not ready");
+        }
+        return true;
+      });
+    }
+    catch (IllegalStateException e)
+    {
+      System.out.println("Task Failed at "+ (System.currentTimeMillis() - startTime));
+    }
   }
 
 }

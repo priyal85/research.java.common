@@ -20,7 +20,6 @@ public class MD5Test {
     throws NoSuchAlgorithmException {
       String hash = "ARXMX9P0TBEVISVKFFAPCG==";
       String password = "FreeTextChecklistActivityDefinitionSupplier"+"ChemistryRequestActivityDefinitionSupplier"+"LocalAnalysisActivityDefinitionSupplier"+"LocalAnalysisRequestActivityDefinitionSupplier"+"MicrobiologyRequestActivityDefinitionSupplier"+"RadiologyRequestActivityDefinitionSupplier";
-          
       MessageDigest md = MessageDigest.getInstance("MD5");
       md.update(password.getBytes());
       byte[] digest = md.digest();

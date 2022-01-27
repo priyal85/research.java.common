@@ -2,6 +2,8 @@ package research.java.common.tutorials;
 
 import java.util.Date;
 
+import org.springframework.retry.RecoveryCallback;
+import org.springframework.retry.RetryContext;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
@@ -11,7 +13,7 @@ public class RetryTest
   
   private static int count=0;
 
-  public static void main(String[] args)
+  public static void main(String[] args) throws Throwable
   {
     RetryTemplate retryTemplate = new RetryTemplate();
     ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
@@ -35,6 +37,15 @@ public class RetryTest
           throw new IllegalStateException("Task is not ready");
         }
         return true;
+      }, new RecoveryCallback<Boolean>(){
+
+        @Override
+        public Boolean recover(RetryContext context) throws Exception
+        {
+          System.out.println("Task Recovered at "+ (System.currentTimeMillis() - startTime));
+          return true;
+        }
+        
       });
     }
     catch (IllegalStateException e)

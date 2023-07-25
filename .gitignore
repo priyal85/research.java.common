@@ -5,3 +5,5 @@ target
 output
 /bin/
 test-output/
+.idea
+

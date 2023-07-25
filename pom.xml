@@ -135,11 +135,48 @@
 			<artifactId>spring-retry</artifactId>
 			<version>1.2.5.RELEASE</version>
 		</dependency>
+		<!--<dependency>
+			<groupId>com.github.mwiede</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.2.9</version>
+		</dependency>-->
 		<dependency>
 			<groupId>org.eclipse.jgit</groupId>
 			<artifactId>org.eclipse.jgit</artifactId>
-			<version>5.4.2.201908231537-r</version>
+<!--			<version>5.4.2.201908231537-r</version>-->
+<!--			<version>5.13.0.202109080827-r</version>-->
+			<version>5.13.0.202109080827-r-redhat-00001</version>
+<!--			<version>6.5.0.202303070854-r</version>-->
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jgit</groupId>
+			<artifactId>org.eclipse.jgit.ssh.apache</artifactId>
+<!--			<version>5.13.0.202109080827-r</version>-->
+			<version>5.13.0.202109080827-r-redhat-00001</version>
+	<!--		<exclusions>
+				<exclusion>
+					<groupId>org.apache.sshd</groupId>
+					<artifactId>sshd-osgi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.sshd</groupId>
+					<artifactId>sshd-sftp</artifactId>
+				</exclusion>
+			</exclusions>-->
+		</dependency>
+		<!--<dependency>
+			<groupId>org.eclipse.jgit</groupId>
+			<artifactId>org.eclipse.jgit.ssh.jsch</artifactId>
+			&lt;!&ndash;			<version>5.4.2.201908231537-r</version>&ndash;&gt;
+			<version>5.13.0.202109080827-r</version>
+&lt;!&ndash;			<version>6.5.0.202303070854-r</version>&ndash;&gt;
+			&lt;!&ndash;<exclusions>
+				<exclusion>
+					<groupId>com.jcraft</groupId>
+					<artifactId>jsch</artifactId>
+				</exclusion>
+			</exclusions>&ndash;&gt;
+		</dependency>-->
 	</dependencies>
 	<build>
 		<resources>

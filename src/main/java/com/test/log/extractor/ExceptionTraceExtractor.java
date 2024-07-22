@@ -86,7 +86,8 @@ public class ExceptionTraceExtractor {
 
       while ((line = reader.readLine()) != null) {
         line = line.replaceFirst("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3} ", ""); // Remove date time stamp
-        line = line.replaceAll("\\(default task-\\d+\\)", ""); // Remove (default task-nn)
+        line = line.replaceAll("\\(default task-\\d+\\)", ""); // Remove Thread (default task-nn)
+        line = line.replaceAll("\\s\\s\\[\\w+\\]", ""); // Remove [username]
         if (line.contains(targetExceptionMessage)) {
           inStackTrace = true;
           currentStackTrace.append(line).append("\n");

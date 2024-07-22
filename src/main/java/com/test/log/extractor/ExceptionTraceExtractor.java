@@ -93,6 +93,7 @@ public class ExceptionTraceExtractor {
           currentStackTrace.append(line).append("\n");
         } else if (inStackTrace) {
           line = line.replaceFirst("\tat", "\tat "); // Remove leading "at
+          line = line.replaceFirst(".GeneratedMethodAccessor\\d+", ".GeneratedMethodAccessor133");
           currentStackTrace.append(line).append("\n");
           if (line.trim().isEmpty()) { // End of stack trace
             String stackTrace = currentStackTrace.toString();

@@ -3,6 +3,7 @@ package com.test;
 import java.time.temporal.WeekFields;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.stream.Collectors;
@@ -32,6 +33,9 @@ public class CommonTests
     System.gc();
     Thread.sleep(15000);
     System.out.println(theA);
+
+    ServiceLoader<AccessControlListProvider> loader = ServiceLoader.load(AccessControlListProvider.class);
+    loader.iterator();
   }
   
   private static void doStuff() {
@@ -39,6 +43,17 @@ public class CommonTests
     theA=b.getA("A1");
   }
 
+}
+
+ interface AccessControlListProvider
+{
+  /**
+   * Validate access controls policies. By default, request are allowed to support existing functionality of the API
+   *
+   * @param requestURI, EJB or REST URI
+   * @return false if access control policy denied.
+   */
+  boolean validate(String requestURI);
 }
 
 class A {

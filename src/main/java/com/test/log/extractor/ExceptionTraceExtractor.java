@@ -40,7 +40,21 @@ public class ExceptionTraceExtractor {
         return;
       }
     }
-    String targetExceptionMessage = "#### SPRING UPGRADE PRE-CHECK";
+    String searchMsg = null;
+
+    if (args.length > 2 && args[2] != null && !args[2].isEmpty()) {
+      searchMsg = args[2];
+    } else {
+      System.out.println("Enter message to search:");
+      searchMsg = scanner.nextLine();
+      if (searchMsg == null || searchMsg.isEmpty()) {
+       // System.out.println("Empty search message. Continuing with msg '#### SPRING UPGRADE PRE-CHECK'");
+       // searchMsg = "#### SPRING UPGRADE PRE-CHECK"; System.out.println("Empty search message. Continuing with msg '#### SPRING UPGRADE PRE-CHECK'");
+        System.out.println("Empty search message. Continuing with msg 'Could not obtain transaction-synchronized Session for current thread'");
+        searchMsg = "Could not obtain transaction-synchronized Session for current thread";
+      }
+    }
+    String targetExceptionMessage = searchMsg;
 
     HashMap<String, Integer> exceptionCounts = new HashMap<>();
     try {
@@ -90,10 +104,19 @@ public class ExceptionTraceExtractor {
         line = line.replaceAll("\\s\\s\\[\\w+\\]", ""); // Remove [username]
         if (line.contains(targetExceptionMessage)) {
           inStackTrace = true;
+          line = line.replaceFirst("TrackingID\\[[A-F0-9]{32}\\]", "TrackingID[DummyTrackingID]");
+          line = line.replaceFirst("CosmicClusteredScheduler_Worker-\\d+", "CosmicClusteredScheduler_Worker-1");
+          line = line.replaceFirst("EJB async - \\d+", "EJB async - 1");
           currentStackTrace.append(line).append("\n");
         } else if (inStackTrace) {
+          if (line.startsWith("INFO ")){
+            continue;
+          }
           line = line.replaceFirst("\tat", "\tat "); // Remove leading "at
           line = line.replaceFirst(".GeneratedMethodAccessor\\d+", ".GeneratedMethodAccessor133");
+          line = line.replaceFirst("CosmicClusteredScheduler_Worker-\\d+", "CosmicClusteredScheduler_Worker-1");
+          line = line.replaceFirst("EE-ManagedScheduledExecutorService-default-Thread-\\d+", "EE-ManagedScheduledExecutorService-default-Thread-1");
+          line = line.replaceFirst("EJB async - \\d+", "EJB async - 1");
           currentStackTrace.append(line).append("\n");
           if (line.trim().isEmpty()) { // End of stack trace
             String stackTrace = currentStackTrace.toString();

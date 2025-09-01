@@ -19,6 +19,7 @@ interface MyInterface {
 // The original class implementing the interface
 class OriginalClass implements MyInterface {
   @Override
+  @MethodAnnotation
   public void doSomething() {
     System.out.println("Doing something in the original class.");
   }
